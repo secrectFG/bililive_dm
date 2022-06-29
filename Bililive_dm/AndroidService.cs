@@ -93,10 +93,10 @@ namespace Bililive_dm
 
         }
 
-        public override void Stop()
-        {
-            MessageBox.Show("本插件不允许停用");
-        }
+        //public override void Stop()
+        //{
+        //    MessageBox.Show("本插件不允许停用");
+        //}
 
         public override void Inited()
         {

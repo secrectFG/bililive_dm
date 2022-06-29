@@ -273,7 +273,7 @@ namespace BiliDMLib
                         var json = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
                         if (debuglog)
                         {
-                            Console.WriteLine(json);
+                            Console.WriteLine("ProcessDanmaku json:" + json);
                         }
                         try
                         {
