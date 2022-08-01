@@ -137,7 +137,7 @@ namespace Bililive_dm
                             await Task.Delay(TimeSpan.FromSeconds(1));
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                         if (pipeServer.IsConnected)
                         {

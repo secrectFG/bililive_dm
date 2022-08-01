@@ -120,7 +120,7 @@ namespace Bililive_dm
                 File.Create(Path.Combine(path, "lastrun.txt")).Close();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -159,13 +159,13 @@ namespace Bililive_dm
             {
 
                 Title += Properties.Resources.MainWindow_MainWindow_____傻逼版本_;
-#if !DEBUG
-                if(!(Debugger.IsAttached || offline_mode))
-                {
-                    MessageBox.Show(Application.Current.MainWindow, Properties.Resources.MainWindow_MainWindow_你的打开方式不正确);
-                    this.Close();
-                }
-#endif
+//#if !DEBUG
+//                if(!(Debugger.IsAttached || offline_mode))
+//                {
+//                    MessageBox.Show(Application.Current.MainWindow, Properties.Resources.MainWindow_MainWindow_你的打开方式不正确);
+//                    this.Close();
+//                }
+//#endif
             }
             if (debug_mode)
             {
@@ -253,7 +253,7 @@ namespace Bililive_dm
                                             continue;
                                         }
                                     }
-                                    catch (Exception e)
+                                    catch (Exception)
                                     {
 
                                     }
@@ -643,6 +643,7 @@ namespace Bililive_dm
             //            logging("當前房間人數:" + e.UserCount);
             //            AddDMText("當前房間人數", e.UserCount+"", true);
             //AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
+            Console.WriteLine("當前房間人數:" + e.UserCount);
             if (CheckAccess())
             {
                 if (debug_mode)
@@ -658,7 +659,8 @@ namespace Bililive_dm
             foreach (var dmPlugin in App.Plugins)
             {
                 if (dmPlugin.Status)
-                    new Thread(() =>
+                    Task.Run(() =>
+                    //new Thread(() =>
                     {
                         try
                         {
@@ -668,7 +670,8 @@ namespace Bililive_dm
                         {
                             Utils.PluginExceptionHandler(ex, dmPlugin);
                         }
-                    }).Start();
+                    });
+                        //.Start();
             }
 
             SendSSP(string.Format(Properties.Resources.MainWindow_b_ReceivedRoomCount_, e.UserCount));
@@ -955,17 +958,17 @@ namespace Bililive_dm
 
         public void SendSSP(string msg)
         {
-            if (SSTP.Dispatcher.CheckAccess())
-            {
-                if (SSTP.IsChecked == true)
-                {
-                    SSTPProtocol.SendSSPMsg(msg);
-                }
-            }
-            else
-            {
-                SSTP.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => SendSSP(msg)));
-            }
+            //if (SSTP.Dispatcher.CheckAccess())
+            //{
+            //    if (SSTP.IsChecked == true)
+            //    {
+            //        SSTPProtocol.SendSSPMsg(msg);
+            //    }
+            //}
+            //else
+            //{
+            //    SSTP.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => SendSSP(msg)));
+            //}
         }
 
         private async void b_Disconnected(object sender, DisconnectEvtArgs args)
@@ -1035,6 +1038,7 @@ namespace Bililive_dm
 
         public void logging(string text)
         {
+            Trace.WriteLine(text);
             if (Log.Dispatcher.CheckAccess())
             {
                 lock (_messageQueue)
@@ -1406,6 +1410,7 @@ namespace Bililive_dm
                 }
                 try
                 {
+                    if (!file.ToLower().EndsWith(".dll")) continue;
                     var dll = Assembly.LoadFrom(file);
 
                     if (debug_mode)
@@ -1619,7 +1624,7 @@ namespace Bililive_dm
             {
                 FilterRegex = new Regex(Regex.Text.Trim());
             }
-            catch (Exception exception)
+            catch (Exception)
             {
 
             }

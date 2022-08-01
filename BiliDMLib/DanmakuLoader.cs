@@ -85,7 +85,7 @@ namespace BiliDMLib
                         ChatPort = server.Item2;
                         if (string.IsNullOrEmpty(ChatHost))
                         {
-                            throw new Exception();
+                            throw new Exception($"ChatHost IsNullOrEmpty ChatHost:{ChatHost}");
                         }
                   
                     }
@@ -107,12 +107,12 @@ namespace BiliDMLib
                             LogMessage?.Invoke(this, new LogMessageArgs() {message = msg});
                         }
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
                         // 其他错误（XML解析错误？）
                         ChatHost = defaulthosts[new Random().Next(defaulthosts.Length)];
                         ChatPort = defaultport;
-                        var msg = "获取弹幕服务器地址时出现未知错误，尝试使用常见地址连接";
+                        var msg = "获取弹幕服务器地址时出现未知错误，尝试使用常见地址连接 e:"+e;
                         LogMessage?.Invoke(this, new LogMessageArgs() {message = msg});
                     }
 
@@ -135,7 +135,7 @@ namespace BiliDMLib
                 NetStream = Stream.Synchronized(Client.GetStream());
                 cancellationTokenSource = new CancellationTokenSource();
 
-                if (await SendJoinChannel(channelId,token, cancellationTokenSource.Token))
+                if (await SendJoinChannel(channelId, token, cancellationTokenSource.Token))
                 {
                     Connected = true;
                     _=this.ReceiveMessageLoop(cancellationTokenSource.Token);
@@ -161,7 +161,7 @@ namespace BiliDMLib
                 var buffer = new byte[4096];
                 while (this.Connected)
                 {
-                    await NetStream.ReadBAsync(stableBuffer, 0, 16,ct);
+                    await NetStream.ReadBAsync(stableBuffer, 0, 16, ct);
                     var protocol=DanmakuProtocol.FromBuffer(stableBuffer);
                     if (protocol.PacketLength < 16)
                     {
@@ -175,7 +175,7 @@ namespace BiliDMLib
                     
                     buffer = new byte[payloadlength];
                     
-                    await NetStream.ReadBAsync(buffer, 0, payloadlength,ct);
+                    await NetStream.ReadBAsync(buffer, 0, payloadlength, ct);
                     if (heartbeatLoop == null)
                     {
                         heartbeatLoop = this.HeartbeatLoop(cancellationTokenSource.Token);
@@ -199,7 +199,7 @@ namespace BiliDMLib
                                 }
                               
                             }
-                            catch (Exception e)
+                            catch (Exception)
                             {
                                 
                             }
@@ -227,7 +227,7 @@ namespace BiliDMLib
                                 }
 
                             }
-                            catch (Exception e)
+                            catch (Exception)
                             {
 
                             }
@@ -356,7 +356,7 @@ namespace BiliDMLib
         private async Task SendHeartbeatAsync(CancellationToken ct)
         {
             await SendSocketDataAsync(2, "[object Object]", ct);
-            Debug.WriteLine("Message Sent: Heartbeat");
+            //Debug.WriteLine("Message Sent: Heartbeat");
         }
 
         Task SendSocketDataAsync(int action, string body , CancellationToken ct)
@@ -401,7 +401,7 @@ namespace BiliDMLib
 
 
             var playload = JsonConvert.SerializeObject(packetModel);
-             await SendSocketDataAsync(7, playload,ct);
+             await SendSocketDataAsync(7, playload, ct);
             return true;
         }
 
