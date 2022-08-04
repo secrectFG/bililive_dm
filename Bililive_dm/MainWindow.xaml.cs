@@ -1428,14 +1428,25 @@ namespace Bililive_dm
                             {
                                 sw.Restart();
                             }
-                            var plugin = (DMPlugin)Activator.CreateInstance(exportedType);
+                            DMPlugin plugin = null;
+                            try
+                            {
+                                plugin = (DMPlugin)Activator.CreateInstance(exportedType);
+                                App.Plugins.Add(plugin);
+                            }
+                            catch (Exception e)
+                            {
+                                logging($"加载 {dll.FullName} 失败");
+                                continue;
+                            }
+                            
                             if (debug_mode)
                             {
                                 sw.Stop();
                                 logging(
-                                    $"插件{exportedType.FullName}({plugin.PluginName})加载完毕，用时{sw.ElapsedMilliseconds}ms");
+                                    $"插件{exportedType.FullName}({plugin?.PluginName})加载完毕，用时{sw.ElapsedMilliseconds}ms");
                             }
-                            App.Plugins.Add(plugin);
+                            
                         }
                     }
                 }
