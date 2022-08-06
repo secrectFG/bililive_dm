@@ -27,7 +27,7 @@ namespace Bililive_dm
 
         public App()
         {
-
+            
             AddArchSpecificDirectory();
             Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
             try
@@ -48,6 +48,8 @@ namespace Bililive_dm
 
             Thread.CurrentThread.CurrentUICulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
+
+            
         }
 
         public static new App Current => (App)Application.Current;

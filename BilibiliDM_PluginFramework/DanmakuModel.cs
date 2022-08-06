@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
@@ -293,6 +294,9 @@ namespace BilibiliDM_PluginFramework
 #pragma warning disable CS0618 // 类型或成员已过时
             RawData = JSON;
 #pragma warning restore CS0618 // 类型或成员已过时
+
+
+
             JSON_Version = version;
             switch (version)
             {

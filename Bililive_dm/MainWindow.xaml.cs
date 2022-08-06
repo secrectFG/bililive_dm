@@ -35,6 +35,7 @@ using DataGrid = System.Windows.Controls.DataGrid;
 using MenuItem = System.Windows.Controls.MenuItem;
 using MessageBox = System.Windows.MessageBox;
 using System.Windows.Markup;
+using System.Text;
 
 namespace Bililive_dm
 {
@@ -398,6 +399,7 @@ namespace Bililive_dm
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            testText.Text = Properties.Settings.Default.testString;
             Full.IsChecked = fulloverlay_enabled;
             SideBar.IsChecked = overlay_enabled;
             SaveLog.IsChecked = savelog_enabled;
@@ -1038,9 +1040,10 @@ namespace Bililive_dm
 
         public void logging(string text)
         {
-            Trace.WriteLine(text);
+            
             if (Log.Dispatcher.CheckAccess())
             {
+                Trace.WriteLine("logging " + text);
                 lock (_messageQueue)
                 {
                     if (_messageQueue.Count >= _maxCapacity)
@@ -1146,10 +1149,21 @@ namespace Bililive_dm
 
         public void Test_OnClick(object sender, RoutedEventArgs e)
         {
-            //            logging("投喂记录不会在弹幕模式上出现, 这不是bug");
-            var ran = new Random();
-            // _danmakuQueue.Enqueue(new DanmakuModel("{\"cmd\":\"SUPER_CHAT_MESSAGE\",\"data\":{\"id\":\"200541\",\"uid\":18923374,\"price\":30,\"rate\":1000,\"message\":\"\\u4e09\\u4e03\\u662f\\u4e00\\u79cd\\u4e2d\\u836f\\u54e6\\uff08\\u836f\\u5b66\\u5b9d\\u8d1d\\u7684\\u80af\\u5b9a\\uff09\",\"trans_mark\":0,\"is_ranked\":0,\"message_trans\":\"\",\"background_image\":\"http:\\/\\/i0.hdslb.com\\/bfs\\/live\\/1aee2d5e9e8f03eed462a7b4bbfd0a7128bbc8b1.png\",\"background_color\":\"#EDF5FF\",\"background_icon\":\"\",\"background_price_color\":\"#7497CD\",\"background_bottom_color\":\"#2A60B2\",\"ts\":1586521245,\"token\":\"1018B059\",\"medal_info\":{\"icon_id\":0,\"target_id\":168598,\"special\":\"\",\"anchor_uname\":\"\\u900d\\u9065\\u6563\\u4eba\",\"anchor_roomid\":1017,\"medal_level\":11,\"medal_name\":\"\\u523a\\u513f\",\"medal_color\":\"#a068f1\"},\"user_info\":{\"uname\":\"\\u7ebf\\u7c92\\u4f53hl-s\",\"face\":\"http:\\/\\/i2.hdslb.com\\/bfs\\/face\\/c521ea6ef23c738b39f0823a18a7c0bcc1aedfa5.jpg\",\"face_frame\":\"http:\\/\\/i0.hdslb.com\\/bfs\\/live\\/78e8a800e97403f1137c0c1b5029648c390be390.png\",\"guard_level\":3,\"user_level\":10,\"level_color\":\"#969696\",\"is_vip\":0,\"is_svip\":0,\"is_main_vip\":1,\"title\":\"0\",\"manager\":0},\"time\":60,\"start_time\":1586521245,\"end_time\":1586521305,\"gift\":{\"num\":1,\"gift_id\":12000,\"gift_name\":\"\\u9192\\u76ee\\u7559\\u8a00\"}}}\r\n",2));
+            if (simulateReal.IsChecked ?? false)
+            {
+                var s = Encoding.UTF8.GetString(ExtRes.弹幕格式参考);
+                s=s.Replace("<<弹幕内容>>",testText.Text??"");
+                b.TestDanmu(new DanmakuModel(s, 2));
+                //_danmakuQueue.Enqueue(new DanmakuModel(s, 2));       //_danmakuQueue.Enqueue(new DanmakuModel(
+                //    "{\"cmd\":\"DANMU_MSG\",\"data\":{\"id\":\"8888\",\"uid\":18923374,\"price\":30,\"rate\":1000,\"message\":\"\\u4e09\\u4e03\\u662f\\u4e00\\u79cd\\u4e2d\\u836f\\u54e6\\uff08\\u836f\\u5b66\\u5b9d\\u8d1d\\u7684\\u80af\\u5b9a\\uff09\",\"trans_mark\":0,\"is_ranked\":0,\"message_trans\":\"\",\"background_image\":\"http:\\/\\/i0.hdslb.com\\/bfs\\/live\\/1aee2d5e9e8f03eed462a7b4bbfd0a7128bbc8b1.png\",\"background_color\":\"#EDF5FF\",\"background_icon\":\"\",\"background_price_color\":\"#7497CD\",\"background_bottom_color\":\"#2A60B2\",\"ts\":1586521245,\"token\":\"1018B059\",\"medal_info\":{\"icon_id\":0,\"target_id\":168598,\"special\":\"\",\"anchor_uname\":\"\\u900d\\u9065\\u6563\\u4eba\",\"anchor_roomid\":1017,\"medal_level\":11,\"medal_name\":\"\\u523a\\u513f\",\"medal_color\":\"#a068f1\"},\"user_info\":{\"uname\":\"\\u7ebf\\u7c92\\u4f53hl-s\",\"face\":\"http:\\/\\/i2.hdslb.com\\/bfs\\/face\\/c521ea6ef23c738b39f0823a18a7c0bcc1aedfa5.jpg\",\"face_frame\":\"http:\\/\\/i0.hdslb.com\\/bfs\\/live\\/78e8a800e97403f1137c0c1b5029648c390be390.png\",\"guard_level\":3,\"user_level\":10,\"level_color\":\"#969696\",\"is_vip\":0,\"is_svip\":0,\"is_main_vip\":1,\"title\":\"0\",\"manager\":0},\"time\":60,\"start_time\":1586521245,\"end_time\":1586521305,\"gift\":{\"num\":1,\"gift_id\":12000,\"gift_name\":\"\\u9192\\u76ee\\u7559\\u8a00\"}}}\r\n", 2));
+                return;
+            }
 
+            
+            
+                //            logging("投喂记录不会在弹幕模式上出现, 这不是bug");
+                var ran = new Random();
+            
             var n = ran.Next(100);
             if (n > 98)
             {
@@ -1412,7 +1426,6 @@ namespace Bililive_dm
                 {
                     if (!file.ToLower().EndsWith(".dll")) continue;
                     var dll = Assembly.LoadFrom(file);
-
                     if (debug_mode)
                     {
                         logging("Assembly.FullName == " + dll.FullName);
@@ -1434,7 +1447,7 @@ namespace Bililive_dm
                                 plugin = (DMPlugin)Activator.CreateInstance(exportedType);
                                 App.Plugins.Add(plugin);
                             }
-                            catch (Exception e)
+                            catch (Exception)
                             {
                                 logging($"加载 {dll.FullName} 失败");
                                 continue;
@@ -1686,6 +1699,17 @@ namespace Bililive_dm
                 App.Current.merged[0] = result;
             }
             merged[0] = new ResourceDictionary();
+        }
+
+        private void testText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+            if (IsLoaded)
+            {
+                Properties.Settings.Default.testString = testText.Text;
+                Properties.Settings.Default.Save();
+            }
+               
         }
     }
 }

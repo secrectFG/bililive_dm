@@ -256,6 +256,11 @@ namespace BiliDMLib
             
         }
 
+        public void TestDanmu(DanmakuModel dama)
+        {
+            ReceivedDanmaku?.Invoke(this, new ReceivedDanmakuArgs() { Danmaku = dama });
+        }
+
         private  void ProcessDanmaku(int action, byte[] buffer)
         {
             switch (action)

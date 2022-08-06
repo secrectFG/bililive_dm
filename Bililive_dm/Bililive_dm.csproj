@@ -44,6 +44,9 @@
   <PropertyGroup>
     <TargetZone>Internet</TargetZone>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -155,6 +158,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AndroidService.cs" />
+    <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="ExtRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExtRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="FuckMePlugin.cs" />
     <Compile Include="IDanmakuWindow.cs" />
     <Compile Include="LanguageSelector.xaml.cs">
@@ -170,6 +179,7 @@
       <DependentUpon>Selector.xaml</DependentUpon>
     </Compile>
     <Compile Include="SessionItem.cs" />
+    <Compile Include="SimulateDataStructure.cs" />
     <Compile Include="SSTPProtocol.cs" />
     <Compile Include="StaticModel.cs" />
     <Compile Include="Store.cs" />
@@ -255,6 +265,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="ExtRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExtRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.en-US.resx" />
     <EmbeddedResource Include="Properties\Resources.ja-JP.resx">
       <SubType>Designer</SubType>
@@ -276,6 +290,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="弹幕格式参考.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BilibiliDM_PluginFramework\BilibiliDM_PluginFramework.csproj">

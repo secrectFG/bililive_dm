@@ -37,7 +37,7 @@ namespace Bililive_dm
         private HashSet<string> UserSet;
         private long _danmakuCountRaw;
         private long _danmakuCountShow;
-        private long _userCount;
+        //private long _userCount;
 
         public long UserCount
         {

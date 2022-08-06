@@ -1,0 +1,57 @@
+{
+  "cmd": "DANMU_MSG",
+  "info": [
+    [
+      0,
+      1,
+      25,
+      16777215,
+      1659681809291,
+      1659678925,
+      0,
+      "037e533c",
+      0,
+      0,
+      0,
+      "",
+      0,
+      "{}",
+      "{}",
+      {
+        "mode": 0,
+        "show_player_type": 0,
+        "extra": "{\"send_from_me\":false,\"mode\":0,\"color\":16777215,\"dm_type\":0,\"font_size\":25,\"player_mode\":1,\"show_player_type\":0,\"content\":\"<<弹幕内容>>\",\"user_hash\":\"58610492\",\"emoticon_unique\":\"\",\"bulge_display\":0,\"recommend_score\":0,\"main_state_dm_color\":\"\",\"objective_state_dm_color\":\"\",\"direction\":0,\"pk_direction\":0,\"quartet_direction\":0,\"anniversary_crowd\":0,\"yeah_space_type\":\"\",\"yeah_space_url\":\"\",\"jump_to_url\":\"\",\"space_type\":\"\",\"space_url\":\"\"}"
+      },
+      { "activity_identity": "", "activity_source": 0, "not_show": 0 }
+    ],
+    "<<弹幕内容>>",
+    [695002047, "弹幕测试用户名称", 0, 0, 0, 10000, 1, ""],
+    [
+      2,
+      "飓风",
+      "影视飓风",
+      173551,
+      6067854,
+      "",
+      0,
+      12632256,
+      12632256,
+      12632256,
+      0,
+      0,
+      946974
+    ],
+    [0, 0, 9868950, "\u003e50000", 0],
+    ["", ""],
+    0,
+    0,
+    null,
+    { "ts": 1659681809, "ct": "F8D1E053" },
+    0,
+    0,
+    null,
+    null,
+    0,
+    14
+  ]
+}

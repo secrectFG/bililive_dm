@@ -10,7 +10,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="518" Width="880" FontSize="14.666">
+        Title="B站彈幕姬" Height="584" Width="1003" FontSize="14.666">
     <Window.Resources>
         <ResourceDictionary>
             <bililiveDm:PluginStatusConverter x:Key="Converter"/>
@@ -36,6 +36,9 @@
             <Button Name="Skin" Content="{x:Static properties:Resources.ChangeSkin}"
                     VerticalAlignment="Center" Margin="28,0,0,0" MinWidth="70" Click="Skin_Click"/>
 
+            <TextBlock Text="模拟弹幕内容：" VerticalAlignment="Center" Margin="20,0,0,0"/>
+            <TextBox x:Name="testText" Width="129" Margin="0,0,0,0" VerticalAlignment="Center" Text="测试弹幕" TextChanged="testText_TextChanged"/>
+
         </StackPanel>
         <WrapPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
             <StackPanel Orientation="Horizontal">
@@ -58,6 +61,7 @@
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="ShowInteract"  Content="{x:Static properties:Resources.Interact_Content}"   Checked="ShowInteract_OnChecked" Unchecked="ShowInteract_OnUnchecked"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="IgnoreSpam"    Content="{x:Static properties:Resources.IgnoreSpam_Content}" Checked="IgnoreSpam_OnChecked" Unchecked="IgnoreSpam_OnUnchecked"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="WindowTop"     Content="{x:Static properties:Resources.WindowTop_Content}"  Click="WindowTop_OnChecked"/>
+            <CheckBox VerticalAlignment="Center" IsChecked="True" x:Name="simulateReal"     Content="测试模拟真实弹幕"  Click="WindowTop_OnChecked" Margin="10,0,0,0"/>
         </WrapPanel>
         <DockPanel DockPanel.Dock="Bottom">
             <Button DockPanel.Dock="Right" Content="🌐" Click="SelectLanguage" Padding="0"></Button>
