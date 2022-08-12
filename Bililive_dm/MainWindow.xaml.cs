@@ -1711,5 +1711,12 @@ namespace Bililive_dm
             }
                
         }
+
+        private void PluginGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var datagrid = sender as DataGrid;
+            var plugin = datagrid.SelectedItem as DMPlugin;
+            plugin.Admin();
+        }
     }
 }

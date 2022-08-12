@@ -164,7 +164,7 @@
                         <Button Margin="5 0" Click="OpenPluginFolder_OnClick" Content="{x:Static properties:Resources.Btn_Text_OpenPluginDir}"></Button>
                     </StackPanel>
                     <DataGrid CanUserAddRows="False" x:Name="PluginGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Top" SelectionMode="Single" SelectionUnit="FullRow"
-                  d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">
+                  d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}" MouseDoubleClick="PluginGrid_MouseDoubleClick">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin1}"/>
                             <DataGridTextColumn Binding="{Binding PluginDesc}" ClipboardContentBinding="{Binding PluginDesc}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin2}"/>
