@@ -9,8 +9,10 @@
         xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
+        xmlns:ac="clr-namespace:Bililive_dm.AutoComplete"
+        xmlns:acb="http://wpfcontrols.com/"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="584" Width="1003" FontSize="14.666">
+        Title="B站彈幕姬" Height="584" Width="1003" FontSize="14.666" x:Name="mainWindow">
     <Window.Resources>
         <ResourceDictionary>
             <bililiveDm:PluginStatusConverter x:Key="Converter"/>
@@ -22,22 +24,44 @@
     </Window.Resources>
 
     <DockPanel>
-        <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
-                       VerticalAlignment="Center" Margin="4" />
-            <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666" MinWidth="80" />
-            <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}" VerticalAlignment="Center"
-                    Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="99" Margin="0,5,0,0" >
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="直播间号："
+                       VerticalAlignment="Center" Margin="4,2,4,4" />
+            <!--<TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.666" MinWidth="80" Margin="0,2,0,0" />-->
+            <acb:AutoCompleteComboBox
+                x:Name="RoomId"
+                Height="26"
+                Margin="0,0,6,0"
+                CharacterCasing="Upper"
+                Provider="{Binding ElementName=mainWindow}"
+                VerticalAlignment="Center" Width="139"
+                />
+            <Button x:Name="ConnBtn" Content="连接" VerticalAlignment="Center"
+                    Click="connbtn_Click" Margin="10,0,0,0" MinWidth="70" />
 
-            <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0" VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70"/>
+            <Button Content="断开" Margin="28,0,0,0" VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70"/>
+            <Button Content="清空连接记录" Margin="28,0,0,0" VerticalAlignment="Center" Click="Button_Clear_RoomIdHistroy_Click"/>
             <Button x:Name="Test" Content="{x:Static properties:Resources.Test_Content}" VerticalAlignment="Center"
                     Click="Test_OnClick" Margin="28,0,0,0" MinWidth="70" />
 
             <Button Name="Skin" Content="{x:Static properties:Resources.ChangeSkin}"
                     VerticalAlignment="Center" Margin="28,0,0,0" MinWidth="70" Click="Skin_Click"/>
+            <StackPanel Width="279" VerticalAlignment="Center" Margin="0,5,0,5">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="模拟弹幕内容：" VerticalAlignment="Center" Margin="20,0,0,0" Width="104"/>
+                    <TextBox x:Name="testDanmu" Width="129" Margin="0,0,0,0" VerticalAlignment="Center" Text="测试弹幕" TextChanged="testText_TextChanged"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="模拟用户ID：" VerticalAlignment="Center" Margin="20,0,0,0" Width="104"/>
+                    <TextBox x:Name="testId" Width="129" Margin="0,0,0,0" VerticalAlignment="Center" Text="123" TextChanged="testId_TextChanged" />
+                </StackPanel>
 
-            <TextBlock Text="模拟弹幕内容：" VerticalAlignment="Center" Margin="20,0,0,0"/>
-            <TextBox x:Name="testText" Width="129" Margin="0,0,0,0" VerticalAlignment="Center" Text="测试弹幕" TextChanged="testText_TextChanged"/>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <TextBlock Text="模拟用户名：" VerticalAlignment="Center" Margin="20,0,0,0" Width="104"/>
+                    <TextBox x:Name="testName" Width="129" Margin="0,0,0,0" VerticalAlignment="Center" Text="老王" TextChanged="testText_TextChanged" />
+                </StackPanel>
+
+            </StackPanel>
 
         </StackPanel>
         <WrapPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">

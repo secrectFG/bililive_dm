@@ -142,7 +142,7 @@
     <value>清空彈幕統計(總)</value>
   </data>
   <data name="ConnBtn.Content" xml:space="preserve">
-    <value>連線</value>
+    <value>连接</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin1" xml:space="preserve">
     <value>外掛程式名稱</value>
@@ -196,10 +196,10 @@
     <value>正在自動重連...</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開" xml:space="preserve">
-    <value>連線被斷開</value>
+    <value>连接被斷開</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開__开发者信息_0_" xml:space="preserve">
-    <value>連線被斷開: 開發者資訊{0}</value>
+    <value>连接被斷開: 開發者資訊{0}</value>
   </data>
   <data name="MainWindow_b_ReceivedRoomCount_" xml:space="preserve">
     <value>當前人氣值：{0}</value>
@@ -217,16 +217,16 @@
     <value>彈幕姬報告</value>
   </data>
   <data name="MainWindow_connbtn_Click_正在连接" xml:space="preserve">
-    <value>正在連線</value>
+    <value>正在连接</value>
   </data>
   <data name="MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_" xml:space="preserve">
     <value>請輸入房間編碼,房間編碼是!數!字!</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接失敗" xml:space="preserve">
-    <value>連線失敗</value>
+    <value>连接失敗</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接成功" xml:space="preserve">
-    <value>連線成功</value>
+    <value>连接成功</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
     <value>請有空發給聯繫方式 {0} 謝謝</value>

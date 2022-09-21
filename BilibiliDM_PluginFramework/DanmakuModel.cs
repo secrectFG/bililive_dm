@@ -308,6 +308,7 @@ namespace BilibiliDM_PluginFramework
                     UserName = obj[2][1].ToString();
                     MsgType = MsgTypeEnum.Comment;
                     RawDataJToken = obj;
+                        Trace.WriteLine("JSON:"+ JSON);
                     break;
                 }
                 case 2:

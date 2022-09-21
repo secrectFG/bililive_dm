@@ -62,12 +62,47 @@ namespace Bililive_dm.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string testString {
+        public string testDanmu {
             get {
-                return ((string)(this["testString"]));
+                return ((string)(this["testDanmu"]));
             }
             set {
-                this["testString"] = value;
+                this["testDanmu"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Specialized.StringCollection roomIdHistroy {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["roomIdHistroy"]));
+            }
+            set {
+                this["roomIdHistroy"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int testId {
+            get {
+                return ((int)(this["testId"]));
+            }
+            set {
+                this["testId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string testName {
+            get {
+                return ((string)(this["testName"]));
+            }
+            set {
+                this["testName"] = value;
             }
         }
     }

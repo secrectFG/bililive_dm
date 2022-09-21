@@ -151,7 +151,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連線 的本地化字符串。
+        ///   查找类似 连接 的本地化字符串。
         /// </summary>
         public static string ConnBtn_Content {
             get {
@@ -394,7 +394,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連線被斷開 的本地化字符串。
+        ///   查找类似 连接被斷開 的本地化字符串。
         /// </summary>
         public static string MainWindow_b_Disconnected_連接被斷開 {
             get {
@@ -403,7 +403,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連線被斷開: 開發者資訊{0} 的本地化字符串。
+        ///   查找类似 连接被斷開: 開發者資訊{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_b_Disconnected_連接被斷開__开发者信息_0_ {
             get {
@@ -457,7 +457,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 正在連線 的本地化字符串。
+        ///   查找类似 正在连接 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_正在连接 {
             get {
@@ -475,7 +475,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連線失敗 的本地化字符串。
+        ///   查找类似 连接失敗 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_連接失敗 {
             get {
@@ -484,7 +484,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連線成功 的本地化字符串。
+        ///   查找类似 连接成功 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_連接成功 {
             get {

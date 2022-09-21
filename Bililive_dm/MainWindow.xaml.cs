@@ -36,6 +36,12 @@ using MenuItem = System.Windows.Controls.MenuItem;
 using MessageBox = System.Windows.MessageBox;
 using System.Windows.Markup;
 using System.Text;
+using AutoCompleteTextBox.Editors;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Bililive_dm
 {
@@ -44,8 +50,9 @@ namespace Bililive_dm
     /// <summary>
     ///     MainWindow.xaml 的互動邏輯
     /// </summary>
-    public partial class MainWindow: StyledWindow
+    public partial class MainWindow: StyledWindow , IComboSuggestionProvider
     {
+
         private const int _maxCapacity = 100;
         private readonly Queue<DanmakuModel> _danmakuQueue = new Queue<DanmakuModel>();
 
@@ -399,7 +406,9 @@ namespace Bililive_dm
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            testText.Text = Properties.Settings.Default.testString;
+            testDanmu.Text = Properties.Settings.Default.testDanmu;
+            testId.Text = Properties.Settings.Default.testId.ToString();
+            testName.Text = Properties.Settings.Default.testName;
             Full.IsChecked = fulloverlay_enabled;
             SideBar.IsChecked = overlay_enabled;
             SaveLog.IsChecked = savelog_enabled;
@@ -604,7 +613,7 @@ namespace Bililive_dm
                 if (connectresult)
                 {
                     errorlogging(Properties.Resources.MainWindow_connbtn_Click_連接成功);
-                    AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_connbtn_Click_連接成功, true);
+                    AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, $"房间{roomId}"+Properties.Resources.MainWindow_connbtn_Click_連接成功, true);
                     SendSSP(Properties.Resources.MainWindow_connbtn_Click_連接成功);
                     Ranking.Clear();
                     SaveRoomId(roomId);
@@ -1151,8 +1160,21 @@ namespace Bililive_dm
         {
             if (simulateReal.IsChecked ?? false)
             {
+                testDanmu.Text = string.IsNullOrEmpty(testDanmu.Text) ? "测试弹幕" : testDanmu.Text;
+                testName.Text = string.IsNullOrEmpty(testName.Text) ? "测试用户" : testName.Text;
+                testId.Text = string.IsNullOrEmpty(testId.Text) ? "123" : testId.Text;
+                if (!int.TryParse(testId.Text, out int r))
+                {
+                    MessageBox.Show("Id只能是数字");
+                    return;
+                }
+                
+                
+
                 var s = Encoding.UTF8.GetString(ExtRes.弹幕格式参考);
-                s=s.Replace("<<弹幕内容>>",testText.Text??"");
+                s = s.Replace("<<弹幕内容>>", testDanmu.Text);
+                s = s.Replace("<<用户名>>", testName.Text);
+                s = s.Replace("188888888", r.ToString());
                 b.TestDanmu(new DanmakuModel(s, 2));
                 //_danmakuQueue.Enqueue(new DanmakuModel(s, 2));       //_danmakuQueue.Enqueue(new DanmakuModel(
                 //    "{\"cmd\":\"DANMU_MSG\",\"data\":{\"id\":\"8888\",\"uid\":18923374,\"price\":30,\"rate\":1000,\"message\":\"\\u4e09\\u4e03\\u662f\\u4e00\\u79cd\\u4e2d\\u836f\\u54e6\\uff08\\u836f\\u5b66\\u5b9d\\u8d1d\\u7684\\u80af\\u5b9a\\uff09\",\"trans_mark\":0,\"is_ranked\":0,\"message_trans\":\"\",\"background_image\":\"http:\\/\\/i0.hdslb.com\\/bfs\\/live\\/1aee2d5e9e8f03eed462a7b4bbfd0a7128bbc8b1.png\",\"background_color\":\"#EDF5FF\",\"background_icon\":\"\",\"background_price_color\":\"#7497CD\",\"background_bottom_color\":\"#2A60B2\",\"ts\":1586521245,\"token\":\"1018B059\",\"medal_info\":{\"icon_id\":0,\"target_id\":168598,\"special\":\"\",\"anchor_uname\":\"\\u900d\\u9065\\u6563\\u4eba\",\"anchor_roomid\":1017,\"medal_level\":11,\"medal_name\":\"\\u523a\\u513f\",\"medal_color\":\"#a068f1\"},\"user_info\":{\"uname\":\"\\u7ebf\\u7c92\\u4f53hl-s\",\"face\":\"http:\\/\\/i2.hdslb.com\\/bfs\\/face\\/c521ea6ef23c738b39f0823a18a7c0bcc1aedfa5.jpg\",\"face_frame\":\"http:\\/\\/i0.hdslb.com\\/bfs\\/live\\/78e8a800e97403f1137c0c1b5029648c390be390.png\",\"guard_level\":3,\"user_level\":10,\"level_color\":\"#969696\",\"is_vip\":0,\"is_svip\":0,\"is_main_vip\":1,\"title\":\"0\",\"manager\":0},\"time\":60,\"start_time\":1586521245,\"end_time\":1586521305,\"gift\":{\"num\":1,\"gift_id\":12000,\"gift_name\":\"\\u9192\\u76ee\\u7559\\u8a00\"}}}\r\n", 2));
@@ -1601,6 +1623,15 @@ namespace Bililive_dm
             try
             {
                 Properties.Settings.Default.roomId = roomId;
+                var roomIdHistroy = Properties.Settings.Default.roomIdHistroy;
+                if (roomIdHistroy == null)
+                {
+                    roomIdHistroy = Properties.Settings.Default.roomIdHistroy = new System.Collections.Specialized.StringCollection();
+                }
+                if (!roomIdHistroy.Contains(roomId.ToString()))
+                {
+                    roomIdHistroy.Add(roomId.ToString());
+                }
                 Properties.Settings.Default.Save();
             }
             catch (Exception)
@@ -1623,6 +1654,7 @@ namespace Bililive_dm
         private bool enable_regex = false;
         private string regex = "";
         private bool ignorespam_enabled = false;
+
 
         public bool debug_mode { get; private set; }
 
@@ -1706,10 +1738,24 @@ namespace Bililive_dm
             
             if (IsLoaded)
             {
-                Properties.Settings.Default.testString = testText.Text;
+                Properties.Settings.Default.testDanmu = testDanmu.Text;
+                Properties.Settings.Default.testName = testName.Text;
                 Properties.Settings.Default.Save();
             }
                
+        }
+
+        private void testId_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (IsLoaded)
+            {
+                if (int.TryParse(testId.Text, out int r))
+                {
+                    Properties.Settings.Default.testId = r;
+                    Properties.Settings.Default.Save();
+
+                }
+            }
         }
 
         private void PluginGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -1718,5 +1764,39 @@ namespace Bililive_dm
             var plugin = datagrid.SelectedItem as DMPlugin;
             plugin.Admin();
         }
+
+        public IEnumerable GetSuggestions(string filter)
+        {
+            return Properties.Settings.Default.roomIdHistroy;
+            //if (Properties.Settings.Default.roomIdHistroy==null)
+            //{
+            //    return null;
+            //}
+            //var roomIdList = new List<string>();
+            //foreach (var item in Properties.Settings.Default.roomIdHistroy)
+            //{
+            //    roomIdList.Add(item);
+            //}
+            //return
+            //    roomIdList
+            //        .Where(x => x.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) > -1)
+            //        .ToList();
+        }
+
+        public IEnumerable GetFullCollection()
+        {
+            return Properties.Settings.Default.roomIdHistroy;
+        }
+
+        private void Button_Clear_RoomIdHistroy_Click(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.roomIdHistroy != null)
+            {
+                Properties.Settings.Default.roomIdHistroy.Clear();
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        
     }
 }
