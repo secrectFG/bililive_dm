@@ -42,6 +42,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bililive_dm.Extension;
 
 namespace Bililive_dm
 {
@@ -1623,16 +1624,14 @@ namespace Bililive_dm
             try
             {
                 Properties.Settings.Default.roomId = roomId;
-                var roomIdHistroy = Properties.Settings.Default.roomIdHistroy;
-                if (roomIdHistroy == null)
+                lock (roomIdHistroyLock)
                 {
-                    roomIdHistroy = Properties.Settings.Default.roomIdHistroy = new System.Collections.Specialized.StringCollection();
+                    if (!RoomIdHistroy.Contains(roomId.ToString()))
+                    {
+                        RoomIdHistroy.Add(roomId.ToString());
+                    }
+                    Properties.Settings.Default.Save();
                 }
-                if (!roomIdHistroy.Contains(roomId.ToString()))
-                {
-                    roomIdHistroy.Add(roomId.ToString());
-                }
-                Properties.Settings.Default.Save();
             }
             catch (Exception)
             {
@@ -1765,9 +1764,27 @@ namespace Bililive_dm
             plugin.Admin();
         }
 
+        object roomIdHistroyLock = new object();
+        System.Collections.Specialized.StringCollection RoomIdHistroy { get {
+                
+                if (Properties.Settings.Default.roomIdHistroy == null)
+                {
+                    Properties.Settings.Default.roomIdHistroy = new System.Collections.Specialized.StringCollection();
+                }
+                return Properties.Settings.Default.roomIdHistroy;
+            }
+            set {
+                Properties.Settings.Default.roomIdHistroy = value;
+            }
+        }
+
         public IEnumerable GetSuggestions(string filter)
         {
-            return Properties.Settings.Default.roomIdHistroy;
+            lock (roomIdHistroyLock)
+            {
+                return RoomIdHistroy.ToArray();
+            }
+            
             //if (Properties.Settings.Default.roomIdHistroy==null)
             //{
             //    return null;
@@ -1785,16 +1802,20 @@ namespace Bililive_dm
 
         public IEnumerable GetFullCollection()
         {
-            return Properties.Settings.Default.roomIdHistroy;
+            lock (roomIdHistroyLock)
+            {
+                return RoomIdHistroy.ToArray();
+            }
         }
 
         private void Button_Clear_RoomIdHistroy_Click(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.roomIdHistroy != null)
+            lock (roomIdHistroyLock)
             {
-                Properties.Settings.Default.roomIdHistroy.Clear();
+                RoomIdHistroy.Clear();
                 Properties.Settings.Default.Save();
             }
+            
         }
 
         

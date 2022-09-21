@@ -163,6 +163,7 @@
     <Compile Include="AndroidService.cs" />
     <Compile Include="AutoComplete\RoomIdHistroyProvider.cs" />
     <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="Extension\Extension.cs" />
     <Compile Include="ExtRes.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
