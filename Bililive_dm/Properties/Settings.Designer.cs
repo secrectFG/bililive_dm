@@ -61,7 +61,7 @@ namespace Bililive_dm.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("j")]
         public string testDanmu {
             get {
                 return ((string)(this["testDanmu"]));
@@ -73,6 +73,9 @@ namespace Bililive_dm.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsd=\"http://www.w3." +
+            "org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\r\n  <s" +
+            "tring>25715293</string>\r\n  <string>880638</string>\r\n</ArrayOfString>")]
         public global::System.Collections.Specialized.StringCollection roomIdHistroy {
             get {
                 return ((global::System.Collections.Specialized.StringCollection)(this["roomIdHistroy"]));
@@ -84,7 +87,7 @@ namespace Bililive_dm.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("123")]
         public int testId {
             get {
                 return ((int)(this["testId"]));
@@ -96,7 +99,7 @@ namespace Bililive_dm.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("老王")]
         public string testName {
             get {
                 return ((string)(this["testName"]));

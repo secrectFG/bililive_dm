@@ -167,7 +167,7 @@ namespace Bililive_dm
             else
             {
 
-                Title += Properties.Resources.MainWindow_MainWindow_____傻逼版本_;
+                //Title += Properties.Resources.MainWindow_MainWindow_____傻逼版本_;
 //#if !DEBUG
 //                if(!(Debugger.IsAttached || offline_mode))
 //                {
@@ -1810,12 +1810,15 @@ namespace Bililive_dm
 
         private void Button_Clear_RoomIdHistroy_Click(object sender, RoutedEventArgs e)
         {
-            lock (roomIdHistroyLock)
+            var r = MessageBox.Show("确定要清空吗？", "警告", MessageBoxButton.OKCancel);
+            if(r== MessageBoxResult.Yes)
             {
-                RoomIdHistroy.Clear();
-                Properties.Settings.Default.Save();
+                lock (roomIdHistroyLock)
+                {
+                    RoomIdHistroy.Clear();
+                    Properties.Settings.Default.Save();
+                }
             }
-            
         }
 
         

@@ -12,16 +12,20 @@
       <Value Profile="(Default)">zh</Value>
     </Setting>
     <Setting Name="testDanmu" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">j</Value>
     </Setting>
     <Setting Name="roomIdHistroy" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;string&gt;25715293&lt;/string&gt;
+  &lt;string&gt;880638&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="testId" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">123</Value>
     </Setting>
     <Setting Name="testName" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">老王</Value>
     </Setting>
   </Settings>
 </SettingsFile>
