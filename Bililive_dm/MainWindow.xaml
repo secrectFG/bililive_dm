@@ -12,7 +12,7 @@
         xmlns:ac="clr-namespace:Bililive_dm.AutoComplete"
         xmlns:acb="http://wpfcontrols.com/"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="584" Width="1003" FontSize="14.666" x:Name="mainWindow">
+        Title="B站彈幕姬" Height="722" Width="1003" FontSize="14.666" x:Name="mainWindow">
     <Window.Resources>
         <ResourceDictionary>
             <bililiveDm:PluginStatusConverter x:Key="Converter"/>
