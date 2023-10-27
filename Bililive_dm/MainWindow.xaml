@@ -27,17 +27,17 @@
     <DockPanel>
 
 
- <StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="OldConnPanel" >
+ <!--<StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="OldConnPanel" >
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
                            Text="{x:Static properties:Resources.LiveRoomAddr}"
                            VerticalAlignment="Center" Margin="4" />
-                <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666"
-                         MinWidth="80" />
-                <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}"
+                --><!--<TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666"
+                         MinWidth="80" />-->
+                <!--<Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}"
                         VerticalAlignment="Center"
-                        Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
-                <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0"
-                        VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70" />
+                        Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />-->
+                <!--<Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0"-->
+                        <!--VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70" />--><!--
             </StackPanel>
             <StackPanel Orientation="Horizontal" x:Name="OPMPannel">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
@@ -50,9 +50,23 @@
                         Click="OPMConnBtn_OnClick" Margin="28,0,0,0" MinWidth="70" />
                 <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0"
                         VerticalAlignment="Center" x:Name="OPMDisconnBtn" Click="OPMDisconnBtn_OnClickDisconnbtn_OnClick" MinWidth="70" />
-            </StackPanel>
+            </StackPanel>-->
 
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="99" Margin="0,5,0,0" >
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Height="99" Margin="0,5,0,8" >
+            <StackPanel Orientation="Vertical" x:Name="OPMPannel" Width="203" VerticalAlignment="Center">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
+                           Text="{x:Static properties:Resources.LiveRoomCode}"
+                           VerticalAlignment="Center" Margin="5,4,4,4" />
+                <PasswordBox x:Name="OPCode" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14.666"
+                         MinWidth="120" MaxWidth="120" Margin="5,0,0,5"  />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button x:Name="OPMConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}"
+                        VerticalAlignment="Center"
+                        Click="OPMConnBtn_OnClick" Margin="0,0,0,5" MinWidth="70" HorizontalAlignment="Left" />
+                <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="5,0,0,5"
+                        VerticalAlignment="Center" x:Name="OPMDisconnBtn" Click="OPMDisconnBtn_OnClickDisconnbtn_OnClick" MinWidth="70" HorizontalAlignment="Left" />
+                </StackPanel>
+            </StackPanel>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="直播间号："
                        VerticalAlignment="Center" Margin="4,2,4,4" />
             <!--<TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.666" MinWidth="80" Margin="0,2,0,0" />-->
@@ -64,11 +78,13 @@
                 Provider="{Binding ElementName=mainWindow}"
                 VerticalAlignment="Center" Width="139"
                 />
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="ConnBtn" Content="连接" VerticalAlignment="Center"
-                    Click="connbtn_Click" Margin="10,0,0,0" MinWidth="70" />
+                    Click="connbtn_Click" MinWidth="70" HorizontalAlignment="Center" Margin="0,0,0,5" />
 
-            <Button Content="断开" Margin="28,0,0,0" VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70"/>
-            <Button Content="清空连接记录" Margin="28,0,0,0" VerticalAlignment="Center" Click="Button_Clear_RoomIdHistroy_Click"/>
+            <Button Content="断开" VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+            <Button Content="清空连接记录" VerticalAlignment="Center" Click="Button_Clear_RoomIdHistroy_Click" HorizontalAlignment="Center"/>
+            </StackPanel>
             <Button x:Name="Test" Content="{x:Static properties:Resources.Test_Content}" VerticalAlignment="Center"
                     Click="Test_OnClick" Margin="28,0,0,0" MinWidth="70" />
 
